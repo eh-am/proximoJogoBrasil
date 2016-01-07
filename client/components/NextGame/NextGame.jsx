@@ -5,11 +5,13 @@ NextGame = class NextGame extends React.Component{
     return 'http://flagpedia.net/data/flags/normal/' + this.props.isoName.toLowerCase() + '.png';
   }
 
+
   render(){
     var date = '';
     var counter = '';
     var flagClassname = "flag placeholder";
 
+    // prepare stuff to be showed
     if (this.props.date){
       moment.locale('pt-br');
       var m = moment(this.props.date);
@@ -26,7 +28,7 @@ NextGame = class NextGame extends React.Component{
     return (
       <div className="nextGame">
         <header>
-          <h3>O próximo jogo será contra</h3>
+          <h3>O próximo jogo do Brasil será contra</h3>
         </header>
 
         <span className={flagClassname}>

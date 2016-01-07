@@ -14,23 +14,23 @@ App = React.createClass({
 
   componentDidMount(){
     // get data from amazon lambda
-    //TODO: uncomment
-    // _getNextGameFromServer();
+    this._getNextGameFromServer();
 
 
     // mocks an ajax call, just for development, as we don't want to
     // waste our bandwith :P
-    setTimeout(() => {
-      this.setState({
-        nextGame: {
-          opponent: 'Argentina',
-          isoName: 'ar',
-          date: new Date(1458856800 * 1000)
-        }
-      });
-    }, 2000);
+    // setTimeout(() => {
+    //   this.setState({
+    //     nextGame: {
+    //       opponent: 'Argentina',
+    //       isoName: 'ar',
+    //       date: new Date(1458856800 * 1000)
+    //     }
+    //   });
+    // }, 2000);
 
   },
+
   _getNextGameFromServer(){
     $.ajax({
       context: this,
