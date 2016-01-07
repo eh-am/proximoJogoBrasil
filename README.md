@@ -1,3 +1,6 @@
+You can see it live at http://proximoJogoBrasil.meteor.com
+
+
 # What's that?
 It's just a simple website that retrieves the first upcoming game of the Brazilian
 soccer team.
