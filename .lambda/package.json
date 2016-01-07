@@ -1,0 +1,17 @@
+{
+  "name": "extract-brazils-next-game",
+  "version": "1.0.0",
+  "description": "a lambda function to extract brazil's next game from www.goal.com.br",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "eduardo aleixo",
+  "license": "MIT",
+  "dependencies": {
+    "cheerio": "^0.19.0",
+    "countrynames": "^0.1.1",
+    "jquery": "^2.1.4",
+    "request": "^2.67.0"
+  }
+}
