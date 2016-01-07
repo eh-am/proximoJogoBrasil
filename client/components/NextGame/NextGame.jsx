@@ -2,10 +2,10 @@
 
 NextGame = class NextGame extends React.Component{
   _getFlagUrl(){
-    // return 'http://flagpedia.net/data/flags/normal/' + this.props.isoName.toLowerCase() + '.png';
-    return '';
-  }
+    if (this.props.isoName.length <= 0) return '';
 
+    return 'http://flagpedia.net/data/flags/normal/' + this.props.isoName.toLowerCase() + '.png';
+  }
 
   render(){
     moment.locale('pt-br');

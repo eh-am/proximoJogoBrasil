@@ -3,7 +3,7 @@ App = React.createClass({
     // sets a dumb game
     var nextGame = {
       opponent: '?????',
-      isoName: 'br',
+      isoName: '',
       date: new Date()
       // date: new Date(1458856800 * 1000)
     };
@@ -14,25 +14,40 @@ App = React.createClass({
 
   componentDidMount(){
     // get data from amazon lambda
+    //TODO: uncomment
+    // _getNextGameFromServer();
 
-    // $.ajax({
-    //   context: this,
-    //   url: 'https://toroprxmgj.execute-api.us-west-2.amazonaws.com/prod/getbrazilsnextgame',
-    //   type: 'GET',
-    //   crossDomain: true,
-    //   contentType: 'application/json',
-    //   success: function (result){
-    //     console.log('this is the result');
-    //     console.log(result);
-    //     this.setState({
-    //       nextOpponent: {
-    //         opponent: result.opponent.ptbr,
-    //         flag: this._getFlagUrl(result.opponent.iso),
-    //         date: new Date(result.time * 1000)
-    //       }
-    //     });
-    //   }
-    // });
+
+    // mocks an ajax call, just for development, as we don't want to
+    // waste our bandwith :P
+    setTimeout(() => {
+      this.setState({
+        nextGame: {
+          opponent: 'Argentina',
+          isoName: 'ar',
+          date: new Date(1458856800 * 1000)
+        }
+      });
+    }, 2000);
+
+  },
+  _getNextGameFromServer(){
+    $.ajax({
+      context: this,
+      url: 'https://toroprxmgj.execute-api.us-west-2.amazonaws.com/prod/getbrazilsnextgame',
+      type: 'GET',
+      crossDomain: true,
+      contentType: 'application/json',
+      success: function (result){
+        this.setState({
+          nextGame: {
+            opponent: result.opponent.ptbr,
+            isoName: result.opponent.iso,
+            date: new Date(result.time * 1000)
+          }
+        });
+      }
+    });
   },
 
 

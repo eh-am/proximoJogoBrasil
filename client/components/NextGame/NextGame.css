@@ -1,5 +1,5 @@
 .flag{
-  width: 550px;
-  height: 385px;
-  background-color: grey;
+  min-width: 550px;
+  min-height: 385px;
+  background-color: lightgrey;
 }
