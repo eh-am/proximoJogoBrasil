@@ -2,9 +2,9 @@ App = React.createClass({
   getInitialState(){
     // sets a dumb game
     var nextGame = {
-      opponent: '?????',
+      opponent: '',
       isoName: '',
-      date: new Date()
+      date: ''
       // date: new Date(1458856800 * 1000)
     };
     return {
@@ -54,11 +54,14 @@ App = React.createClass({
   render(){
     return (
       <div className="container">
-        <NextGame
-          opponent={ this.state.nextGame.opponent }
-          isoName={ this.state.nextGame.isoName }
-          date= { this.state.nextGame.date }
-        />
+        <div className="row">
+          <div className="column">
+            <NextGame
+              opponent={ this.state.nextGame.opponent }
+              isoName={ this.state.nextGame.isoName }
+              date= { this.state.nextGame.date } />
+          </div>
+        </div>
       </div>
     );
   }

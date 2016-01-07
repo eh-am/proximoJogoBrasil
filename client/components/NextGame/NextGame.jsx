@@ -1,5 +1,3 @@
-// import moment from 'moment';
-
 NextGame = class NextGame extends React.Component{
   _getFlagUrl(){
     if (this.props.isoName.length <= 0) return '';
@@ -8,15 +6,36 @@ NextGame = class NextGame extends React.Component{
   }
 
   render(){
-    moment.locale('pt-br');
-    var m = moment(this.props.date);
-    var date = m.format('LLL');
+    var date = '';
+    var counter = '';
+    var flagClassname = "flag placeholder";
+
+    if (this.props.date){
+      moment.locale('pt-br');
+      var m = moment(this.props.date);
+      date = `Em ${m.format('LLL')} (Horário de Brasília)`;
+
+
+      m = moment(this.props.date);
+      counter = `O jogo acontecerá ${m.startOf('hour').fromNow()}`;
+
+      flagClassname = "flag";
+    }
+
 
     return (
       <div className="nextGame">
-        <img src={this._getFlagUrl()} alt={this.props.opponent} className="flag"/>
+        <header>
+          <h3>O próximo jogo será contra</h3>
+        </header>
+
+        <span className={flagClassname}>
+          <img src={this._getFlagUrl()} alt={this.props.opponent}/>
+        </span>
+
         <h2 className="title"> { this.props.opponent } </h2>
-        <h4 className="date">Em { date }</h4>
+        <h4 className="date"> { date } </h4>
+        <h5>{ counter }</h5>
       </div>
     );
   }
