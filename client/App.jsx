@@ -5,7 +5,6 @@ App = React.createClass({
       opponent: '',
       isoName: '',
       date: ''
-      // date: new Date(1458856800 * 1000)
     };
     return {
       nextGame: nextGame
@@ -38,7 +37,9 @@ App = React.createClass({
       type: 'GET',
       crossDomain: true,
       contentType: 'application/json',
-      success: function (result){
+      success: function (response){
+        var result = response.data.matches[0];
+
         this.setState({
           nextGame: {
             opponent: result.opponent.ptbr,
