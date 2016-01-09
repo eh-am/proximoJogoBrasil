@@ -1,19 +1,41 @@
 var cheerio = require('cheerio');
-var request = require('request');
+var request = require('request-promise');
 var countrynames = require('countrynames');
 
+var URL = 'http://www.goal.com/br/fixtures/team/brasil/349';
 
 exports.handler = function(event, context){
-  var URL = 'http://www.goal.com/br/fixtures/team/brasil/349';
-  request(URL, handleRequest);
-
-  function handleRequest(err, response, body){
-    if (err) throw err;
-
-    var match = extractNextMatch(body);
-    context.succeed(match);
-  }
+  handleRequest(context);
 };
+
+// handleRequest();
+
+function handleRequest(context){
+  request(URL)
+  .then(extractNextMatch)
+  .then(function (matches){
+    var response = {
+      // I am returning an array because I am going to return more matches later
+      data: {
+        matches: [matches]
+      }
+    };
+
+    // isomorphic (local and amazon lambda)
+    context ? context.succeed(response) : console.log(JSON.stringify(response));
+  })
+  .catch(function (err){
+    var response = {
+      status: 500,
+      message: err,
+      data: []
+    };
+
+    // isomorphic (local and amazon lambda)
+    context ? context.fail(response) :  console.log(JSON.stringify(response));
+  });
+}
+
 
 
 /**
@@ -23,7 +45,7 @@ function extractNextMatch(data){
   $ = cheerio.load(data);
   var match = $('.match-table tbody').first();
 
-  if (match === null) throw err;
+  if (match <= 0) throw "Could not parse correctly. Maybe the DOM changed?";
 
   $ = cheerio.load(match.html());
 
